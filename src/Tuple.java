@@ -3,28 +3,28 @@
 
 
 public class Tuple<X, Y> { 
-	public X x; 
-	public Y y; 
+	public X min; 
+	public Y max; 
 
-	public Tuple(X x, Y y) { 
-		this.x = x; 
-		this.y = y; 
+	public Tuple(X min, Y max) { 
+		this.min = min; 
+		this.max = max; 
 	}
 
-	public X getX() {
-		return x;
+	public X getMin() {
+		return this.min;
 	}
 
-	public void setX(X x) {
-		this.x = x;
+	public void setMin(X min) {
+		this.min = min;
 	}
 
-	public Y getY() {
-		return y;
+	public Y getMax() {
+		return this.max;
 	}
 
-	public void setY(Y y) {
-		this.y = y;
+	public void setMax(Y max) {
+		this.max = max;
 	}
 
 
