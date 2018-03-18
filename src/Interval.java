@@ -2,47 +2,77 @@ import java.util.ArrayList;
 
 public class Interval {
 	
-	private ArrayList<Tuple<Double, Double>> subsets;
+	private ArrayList<Tuple> subsets;
 
 
 	public Interval(double min, double max) {
 		this.subsets = new ArrayList<>();
-		Tuple<Double, Double> subset = new Tuple<Double, Double>(min, max);
+		Tuple subset = new Tuple(min, max);
 		this.subsets.add(subset);	
 	}
 
-	public Interval(Tuple<Double, Double> subset) {
+	public Interval(Tuple subset) {
 		this.subsets = new ArrayList<>();
 		this.subsets.add(subset);	
 	}
 
-	public Interval(ArrayList<Tuple<Double, Double>> subsets) {
+	public Interval(ArrayList<Tuple> subsets) {
 		this.subsets = new ArrayList<>();
 
-		for(Tuple<Double, Double> subset: subsets) {
+		for(Tuple subset: subsets) {
 			this.subsets.add(subset);
 		}
 	}
 
 
-	public ArrayList<Tuple<Double, Double>> getSubsets() {
+	public ArrayList<Tuple> getSubsets() {
 		return subsets;
 	}
 
-	public void setSubsets(ArrayList<Tuple<Double, Double>> subsets) {
+	public void setSubsets(ArrayList<Tuple> subsets) {
 		this.subsets = subsets;
 	}
-
+	
+	/**
+	 * Insert a new tuple in ascending order to the subsets list. If the tuple intersects another tuple,
+	 *  a new tuple will be generated and replace the existing tuple.
+	 * @param t new tuple to insert.
+	 * @throws IllegalArgumentException if a tuple with same amount min and max exists.
+	 */
+	public void addTuple(Tuple t) {
+		int i = 0;
+		int compare = 0;
+		Tuple intersect;
+		while(i < this.subsets.size()-1) {
+			this.subsets.get(i);
+			intersect = this.subsets.get(i).intersects(t);
+			if (intersect != null) {
+				this.subsets.set(i, intersect);
+				break;
+			} else {
+				compare = this.subsets.get(i).compareTo(t);
+				if (compare > 0) {
+					
+				} else if (compare < 0) {
+					
+				} else {
+					throw new IllegalArgumentException("Tuple Already in subsets");
+				}
+			}
+			i++;
+		}
+	}
+	
 	public String toString(){
 		String stringTR = "[ ";
 
 		for(int i = 0; i < this.subsets.size(); i++) {
 
 			if(i < this.subsets.size() - 1) {
-				stringTR = stringTR + "( " + this.subsets.get(i).getMin() + " , " + this.subsets.get(i).getMax() + " ) U ";
+				stringTR += this.subsets.get(i).toString() + " U ";
 			}
 			else {
-				stringTR = stringTR + "( " + this.subsets.get(i).getMin() + " , " + this.subsets.get(i).getMax() + " ) ]";	
+				stringTR += this.subsets.get(i).toString() + " ]";	
 			}
 		}
 
