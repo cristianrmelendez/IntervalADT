@@ -3,20 +3,28 @@ public class Tuple implements Comparable<Tuple> {
 
 	private Double min; 
 	private Double max;
-	//private boolean includedMin
-	//private boolean includedMax
-
+	
+	/**
+	 * Returns a new tuple, if min is greater than or equal to max throws illegal argument exception.
+	 * @param min Double minimum value of the tuple
+	 * @param max Double maximum value of the tuple
+	 * @throws IllegalArgumentException if min is greater or equal to max
+	 */
 	public Tuple(Double min, Double max) { 
 		if (min >= max)
 			throw new IllegalArgumentException("Min cannot be greater or equal to Max");
 		this.min = min; 
 		this.max = max; 
 	}
-
+	
 	public Double getMin() {
 		return this.min;
 	}
 
+	/**
+	 * Set new Minimum
+	 * @param min Double new Minimum
+	 */
 	public void setMin(Double min) {
 		this.min = min;
 	}
@@ -24,7 +32,11 @@ public class Tuple implements Comparable<Tuple> {
 	public Double getMax() {
 		return this.max;
 	}
-
+	
+	/**
+	 * Set new Maximum
+	 * @param max Double new Maximum
+	 */
 	public void setMax(Double max) {
 		this.max = max;
 	}
@@ -77,6 +89,15 @@ public class Tuple implements Comparable<Tuple> {
 		} else {
 			return 0;
 		}
+	}
+	
+	@Override
+	public boolean equals(Object t) {
+		if ( t instanceof Tuple) {
+			Tuple t1 = (Tuple) t;
+			return this.max == t1.max && this.min == t1.min;
+		}
+		return false;
 	}
 
 	public String toString() {
