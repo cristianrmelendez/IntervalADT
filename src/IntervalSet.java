@@ -4,13 +4,6 @@ public class IntervalSet {
 	
 	private ArrayList<Interval> intervals;
 
-
-	public IntervalSet(double min, double max) {
-		this.intervals = new ArrayList<>();
-		Interval subset = new Interval(min, max, false, false);
-		this.intervals.add(subset);	
-	}
-
 	public IntervalSet(Interval subset) {
 		this.intervals = new ArrayList<>();
 		this.intervals.add(subset);	
@@ -23,7 +16,12 @@ public class IntervalSet {
 			this.intervals.add(subset);
 		}
 	}
-
+	
+	public IntervalSet( Interval i1, Interval i2) {
+		this.intervals = new ArrayList<>();
+		this.intervals.add(i1);
+		this.intervals.add(i2);
+	}
 
 	public ArrayList<Interval> getSubsets() {
 		return intervals;

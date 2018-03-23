@@ -31,8 +31,8 @@ public class Interval implements Comparable<Interval> {
 		}
 		this.universal = universal;
 		this.empty = empty;
-		
 	}
+	
 	/**
 	 * Return the min value of the interval, if the set is empty the return an null value
 	 * @return min
@@ -62,6 +62,21 @@ public class Interval implements Comparable<Interval> {
 	 */
 	public void setMax(Double max) {
 		this.max = max;
+	}
+	
+	/**
+	 * Returns true if empty set
+	 * @return true if empty set, false otherwise
+	 */
+	public boolean isUniversal() {
+		return this.universal;
+	}
+	/**
+	 * Returns true if empty set
+	 * @return true if empty set, false otherwise
+	 */
+	public boolean isEmptySet() {
+		return this.empty;
 	}
 
 	/**
@@ -105,20 +120,36 @@ public class Interval implements Comparable<Interval> {
 	}
 	
 	/**
-	 * This method will unified two intervals and will return an intervalSet containing them.
+	 * Takes 2 intervals and if they intersect, will return an interval set with one interval representing both intervals.
+	 * If they don't intersect, it will return an interval set containing both intervals.
+	 * @param interval1 interval one of to be joined.
+	 * @param interval2 interval two to be joined.
+	 * @return interval set containing an interval or intervals to represent the union operation
 	 */
-	public IntervalSet union(Interval interval1) {
+	public static IntervalSet union(Interval interval1, Interval interval2) {
 		
 		
+		return null;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param interval1 
+	 * @param interval2 
+	 * @return 
+	 */
+	public static IntervalSet complement(Interval interval) {
 		
-		return new IntervalSet(0,0);
+		
+		return null;
 	}
 	
 	
 	/**
-	 * This method will return true if the element enter as parameter is located in the range between min and max.
-	 * @param element
-	 * @return
+	 * This method will return true if the element is within the range of the target interval.
+	 * @param element double number to find in range.
+	 * @return ture if in range false otherwise.
 	 */
 	public Boolean contains(Double element ) {
 		
@@ -145,6 +176,7 @@ public class Interval implements Comparable<Interval> {
 		return false;
 	}
 
+	@Override
 	public String toString() {
 		return "[" + this.min + ", " + this.max + "]";
 	}
