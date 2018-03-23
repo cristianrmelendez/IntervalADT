@@ -1,43 +1,57 @@
 
 public class Interval implements Comparable<Interval> {
 
-	private Double min; 
-	private Double max;
+	private double min; 
+	private double max;
 	private Boolean universal;
 	private Boolean empty;
 	
 	
 	/**
-	 * Create a new Interval, if min is greater than or equal to max throws illegal argument exception. If universal is true
-	 * min will be set to negative infinity and max will be set to positive infinity. If empty is true the interval will represent
-	 * the empty set
+	 * Create a new Interval, if min is greater than or equal to max throws illegal argument exception. 
 	 * @param min Double minimum value of the tuple
 	 * @param max Double maximum value of the tuple
 	 * @param universal - if true the interval will represent all the real numbers
 	 * @param empty -  if true the interval will represent the empty set
 	 * @throws IllegalArgumentException if min is greater or equal to max
 	 */
-	public Interval(Double min, Double max, Boolean universal, Boolean empty) { 
+	public Interval(double min, double max) { 
 		if (min >= max)
 			throw new IllegalArgumentException("Min cannot be greater or equal to Max");
 		
+		this.min = min;
+		this.max = max;
+	}
+	
+	
+	
+	/**
+	 * If universal is true
+	 * min will be set to negative infinity and max will be set to positive infinity. If empty is true the interval will represent
+	 * the empty set
+	 */
+	public Interval(Boolean universal, Boolean empty) {
+		if(universal && empty)
+			throw new IllegalArgumentException("An Interval cannot be the Universal set and the empty set at the same time");
+		
+		if (!(universal && empty))
+			throw new IllegalArgumentException("Must specified one, universal or empty");
+		
 		if(universal) {
-		this.min = Double.NEGATIVE_INFINITY;
-		this.max = Double.POSITIVE_INFINITY;
-		}
-		else {
-		this.min = min; 
-		this.max = max; 
-		}
-		this.universal = universal;
-		this.empty = empty;
+			this.min = Double.NEGATIVE_INFINITY;
+			this.max = Double.POSITIVE_INFINITY;
+			}
+			else {
+			this.min = 0; 
+			this.max = 0; 
+			}
 	}
 	
 	/**
 	 * Return the min value of the interval, if the set is empty the return an null value
 	 * @return min
 	 */
-	public Double getMin() {
+	public double getMin() {
 		return this.min;
 	}
 
@@ -52,7 +66,7 @@ public class Interval implements Comparable<Interval> {
 	 * Return the max value of the interval, if the set is empty the return an null value
 	 * @return max
 	 */
-	public Double getMax() {
+	public double getMax() {
 		return this.max;
 	}
 	
@@ -93,21 +107,21 @@ public class Interval implements Comparable<Interval> {
 			if(interval1.getMin() > this.min) {
 				if(interval1.getMax() < this.max) {
 					// case 1
-					return new Interval(interval1.getMin(),interval1.getMax(),false,false);
+					return new Interval(interval1.getMin(),interval1.getMax());
 				}
 				else {
 					// case 2
-					return new Interval(interval1.getMin(),this.max,false,false);
+					return new Interval(interval1.getMin(),this.max);
 				}
 			}
 			else {
 				if(interval1.getMax() < this.max) {
 					// case 3
-					return new Interval(this.min ,interval1.getMax(),false,false);
+					return new Interval(this.min ,interval1.getMax());
 				}
 				else{
 					// case 4
-					return new Interval(this.min ,this.max, false,false);
+					return new Interval(this.min ,this.max);
 				}
 			}
 		}
