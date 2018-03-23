@@ -7,7 +7,7 @@ public class IntervalSet {
 
 	public IntervalSet(double min, double max) {
 		this.intervals = new ArrayList<>();
-		Interval subset = new Interval(min, max);
+		Interval subset = new Interval(min, max, false, false);
 		this.intervals.add(subset);	
 	}
 
