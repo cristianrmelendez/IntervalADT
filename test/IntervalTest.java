@@ -39,7 +39,7 @@ class IntervalTest {
 		// -Inf to Inf
 		Interval interval4 = new Interval(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 
-		assertEquals(Double.NEGATIVE_INFINITY, interval4.getMin();
+		assertEquals(Double.NEGATIVE_INFINITY, interval4.getMin());
 		assertEquals(Double.POSITIVE_INFINITY, interval4.getMax());
 
 	}
