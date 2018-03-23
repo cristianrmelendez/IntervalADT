@@ -1,87 +1,108 @@
-import java.util.ArrayList;
 
-public class Interval {
+public class Interval implements Comparable<Interval> {
+
+	private Double min; 
+	private Double max;
 	
-	private ArrayList<Tuple> subsets;
-
-
-	public Interval(double min, double max) {
-		this.subsets = new ArrayList<>();
-		Tuple subset = new Tuple(min, max);
-		this.subsets.add(subset);	
+	/**
+	 * Returns a new tuple, if min is greater than or equal to max throws illegal argument exception.
+	 * @param min Double minimum value of the tuple
+	 * @param max Double maximum value of the tuple
+	 * @throws IllegalArgumentException if min is greater or equal to max
+	 */
+	public Interval(Double min, Double max) { 
+		if (min >= max)
+			throw new IllegalArgumentException("Min cannot be greater or equal to Max");
+		this.min = min; 
+		this.max = max; 
+	}
+	
+	public Double getMin() {
+		return this.min;
 	}
 
-	public Interval(Tuple subset) {
-		this.subsets = new ArrayList<>();
-		this.subsets.add(subset);	
+	/**
+	 * Set new Minimum
+	 * @param min Double new Minimum
+	 */
+	public void setMin(Double min) {
+		this.min = min;
 	}
 
-	public Interval(ArrayList<Tuple> subsets) {
-		this.subsets = new ArrayList<>();
-
-		for(Tuple subset: subsets) {
-			this.subsets.add(subset);
-		}
-	}
-
-
-	public ArrayList<Tuple> getSubsets() {
-		return subsets;
-	}
-
-	public void setSubsets(ArrayList<Tuple> subsets) {
-		this.subsets = subsets;
+	public Double getMax() {
+		return this.max;
 	}
 	
 	/**
-	 * Insert a new tuple in ascending order to the subsets list. If the tuple intersects another tuple,
-	 *  a new tuple will be generated and replace the existing tuple.
-	 * @param t new tuple to insert.
-	 * @throws IllegalArgumentException if a tuple with same amount min and max exists.
+	 * Set new Maximum
+	 * @param max Double new Maximum
 	 */
-	public void addTuple(Tuple t) {
-		int i = 0;
-		int compare = 0;
-		Tuple intersect;
-		while(i < this.subsets.size()-1) {
-			this.subsets.get(i);
-			intersect = this.subsets.get(i).intersects(t);
-			if (intersect != null) {
-				this.subsets.set(i, intersect);
-				break;
-			} else {
-				compare = this.subsets.get(i).compareTo(t);
-				if (compare > 0) {
-					
-				} else if (compare < 0) {
-					
-				} else {
-					throw new IllegalArgumentException("Tuple Already in subsets");
+	public void setMax(Double max) {
+		this.max = max;
+	}
+
+	/**
+	 * Verifies if two tuples intersect and if they do returns a new tuple with the intersection of them.
+	 * @param t1 first tuple to compare
+	 * @return Returns null if not intersect, otherwise returns a new tuple with the intersection of the two
+	 */
+	public Interval intersects(Interval t) {
+
+
+		if(!(t.getMax() <= this.min || t.getMin() >= this.max)) {
+			
+			if(t.getMin() > this.min) {
+				if(t.getMax() < this.max) {
+					// case 1
+					return new Interval(t.getMin(),t.getMax());
+				}
+				else {
+					// case 2
+					return new Interval(t.getMin(),this.max);
 				}
 			}
-			i++;
+			else {
+				if(t.getMax() < this.max) {
+					// case 3
+					return new Interval(this.min ,t.getMax());
+				}
+				else{
+					// case 4
+					return new Interval(this.min ,this.max);
+				}
+			}
+		}
+
+		else {
+			// case 5 && 6
+			return null;
+
+		}
+	}
+
+	@Override
+	public int compareTo( final Interval t) {
+		if (this.min > t.min) {
+			return -1;
+		}else if (this.max < t.max) {
+			return 1;
+		} else {
+			return 0;
 		}
 	}
 	
-	public String toString(){
-		String stringTR = "[ ";
-
-		for(int i = 0; i < this.subsets.size(); i++) {
-
-			if(i < this.subsets.size() - 1) {
-				stringTR += this.subsets.get(i).toString() + " U ";
-			}
-			else {
-				stringTR += this.subsets.get(i).toString() + " ]";	
-			}
+	@Override
+	public boolean equals(Object t) {
+		if ( t instanceof Interval) {
+			Interval t1 = (Interval) t;
+			return this.max == t1.max && this.min == t1.min;
 		}
-
-
-		return stringTR;
+		return false;
 	}
-}
+
+	public String toString() {
+		return "(" + this.min + ", " + this.max + ")";
+	}
 
 
-
-
-
+} 
