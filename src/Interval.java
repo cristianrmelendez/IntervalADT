@@ -59,7 +59,7 @@ public class Interval implements Comparable<Interval> {
 	 * Set new Minimum
 	 * @param min Double new Minimum
 	 */
-	public void setMin(Double min) {
+	public void setMin(double min) {
 		this.min = min;
 	}
 	/**
@@ -74,7 +74,7 @@ public class Interval implements Comparable<Interval> {
 	 * Set new Maximum
 	 * @param max Double new Maximum
 	 */
-	public void setMax(Double max) {
+	public void setMax(double max) {
 		this.max = max;
 	}
 	
@@ -165,7 +165,7 @@ public class Interval implements Comparable<Interval> {
 	 * @param element double number to find in range.
 	 * @return ture if in range false otherwise.
 	 */
-	public Boolean contains(Double element ) {
+	public Boolean contains(double element ) {
 		
 		return true;
 	}

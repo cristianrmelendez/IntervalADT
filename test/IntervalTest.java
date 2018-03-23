@@ -18,6 +18,13 @@ class IntervalTest {
 		assertEquals(10.99, t1.getMin());
 		assertEquals(11.0, t1.getMax());
 
+		// Regular case part 2
+		Interval t1pt2 = new Interval(-12345432123.99, 345654345411.0);
+		assertEquals(-12345432123.99,  t1pt2.getMin());
+		assertEquals( 345654345411.0, t1pt2.getMax());
+
+
+
 
 		// -Inf to a number 
 		Interval t2 = new Interval(Double.NEGATIVE_INFINITY, 50.0);
