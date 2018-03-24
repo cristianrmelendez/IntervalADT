@@ -4,9 +4,21 @@ import org.junit.jupiter.api.Test;
 
 class IntervalSetTest {
 
+	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testIntervalSetConstructorGetter() {
+		
 	}
+	
+	@Test
+	void testRemoveInterval() {
+		
+	}
+	
+	@Test
+	void testAddInterval() {
+		
+	}
+	
 
 }
