@@ -63,7 +63,7 @@ class IntervalTest {
 
 
 	@Test
-	void tupleIntersectionTest() {
+	void intervalIntersectionTest() {
 		Interval t1 = new Interval(10.0,15.0);
 		Interval t2 = new Interval(11.0,17.0);
 		Interval t3 = new Interval(11.0,15.0);
@@ -71,9 +71,42 @@ class IntervalTest {
 	}
 
 	@Test
-	void tupleEqualityTest() {
+	void intervalEqualityTest() {
 		Interval t1 = new Interval(10.0,15.0);
 		Interval t2 = new Interval(10.0,15.0);
 		assertTrue(t1.equals(t2));
+	}
+	
+	@Test
+	void intervalUnionTest() {
+		Interval t1 = new Interval(10.0,15.0);
+		Interval t2 = new Interval(18.0,20.0);
+		IntervalSet set = Interval.union(t1, t2);
+		IntervalSet set2 = new IntervalSet(t1, t2);
+		assertEquals(set2, set);
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			 Interval.union(t1, t1);
+		});
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			 Interval.union(null, null);
+		});
+		
+		Interval t3 = new Interval(14.0, 21.0);
+		IntervalSet set3 = Interval.union(t1, t3);
+		IntervalSet set4 = new IntervalSet(new Interval(10.0,21.0));
+		assertEquals(set4, set3);
+		
+		Interval t4 = new Interval(true, false);
+		IntervalSet set5 = new IntervalSet(t4);
+		IntervalSet set6 = Interval.union(t4, t2);
+		assertEquals(set5, set6);
+		
+		Interval t5 = new Interval(Double.NEGATIVE_INFINITY, 20);
+		Interval t6 = new Interval(30, Double.POSITIVE_INFINITY);
+		IntervalSet set7 = Interval.union(t5, t6);
+		IntervalSet set8 = new IntervalSet(t5, t6);
+		assertEquals(set8, set7);
 	}
 }

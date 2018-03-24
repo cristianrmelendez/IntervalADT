@@ -7,8 +7,12 @@ public class IntervalSet {
 	/**
 	 * Standard interval constructor that generates an interval set with just one interval.
 	 * @param i Interval to add.
+	 * @throws IllegalArgumentException if the interval passed is null.
 	 */
 	public IntervalSet(Interval i) {
+		if( i == null) {
+			throw new IllegalArgumentException("Interval cannot be null.");
+		}
 		this.intervals = new ArrayList<>();
 		this.intervals.add(i);	
 	}
@@ -17,9 +21,13 @@ public class IntervalSet {
 	 * Returns an IntervalSet containing both sets if they are not equal. Sets will be inserted in ascending order.
 	 * @param i1 Interval to add to set.
 	 * @param i2 Interval to add to set.
-	 * @throws IllegalArgumentException if both intervals are equal.
+	 * @throws IllegalArgumentException if both intervals are equal or if any are null.
 	 */
 	public IntervalSet( Interval i1, Interval i2) {
+		if(i1 == null || i2 == null) {
+			throw new IllegalArgumentException("Intervals cannot be null.");
+		}
+			
 		if( i1.equals(i2)) {
 			throw new IllegalArgumentException("Both intervals cannot be equal.");
 		}
@@ -46,10 +54,13 @@ public class IntervalSet {
 	 * Insert a new tuple in ascending order to the Interval set. If the tuple intersects another tuple,
 	 * a new tuple will be generated and replace the existing tuple.
 	 * @param i new tuple to insert.
-	 * @throws IllegalArgumentException if a tuple with same amount min and max exists.
+	 * @throws IllegalArgumentException if a tuple with the same min and max exists or if the interval passed is null.
 	 */
 	public void addInterval(Interval i) {
 		//TODO
+		if(i == null) {
+			throw new IllegalArgumentException("Interval cannot be null");
+		}
 	}
 	
 	/**

@@ -94,10 +94,11 @@ public class Interval implements Comparable<Interval> {
 	}
 
 	/**
-	 * Verifies if two Intervals intersect and if they do returns a new Interval with the intersection of them. If they dont
+	 * Verifies if two Intervals intersect and if they do returns a new Interval with the intersection of them. If they don't
 	 * intersects then return and empty interval
 	 * @param interval1 interval to compare
 	 * @return Returns null if not intersect, otherwise returns a new tuple with the intersection of the two
+	 * @throws IllegalArgumentException if the interval passed is null.
 	 */
 	public Interval intersects(Interval interval1) {
 
@@ -139,6 +140,7 @@ public class Interval implements Comparable<Interval> {
 	 * @param interval1 interval one of to be joined.
 	 * @param interval2 interval two to be joined.
 	 * @return interval set containing an interval or intervals to represent the union operation
+	 * @throws IllegalArgumentException if any of the intervals is null.
 	 */
 	public static IntervalSet union(Interval interval1, Interval interval2) {
 		
@@ -147,11 +149,11 @@ public class Interval implements Comparable<Interval> {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * @param interval1 
-	 * @param interval2 
-	 * @return 
+	 * This will find the complement of an interval. The complement is the outer boundaries of the interval and will represented by a pair of
+	 * intervals that group all values that do not fall in the range of the passed interval.
+	 * @param interval Interval to find the complement
+	 * @return  an IntervalSet containing the intervals that represent the complement of inputed interval
+	 * @throws IllegalArgumentException if the interval passed is null.
 	 */
 	public static IntervalSet complement(Interval interval) {
 		
@@ -163,7 +165,7 @@ public class Interval implements Comparable<Interval> {
 	/**
 	 * This method will return true if the element is within the range of the target interval.
 	 * @param element double number to find in range.
-	 * @return ture if in range false otherwise.
+	 * @return true if in range false otherwise.
 	 */
 	public Boolean contains(double element ) {
 		
