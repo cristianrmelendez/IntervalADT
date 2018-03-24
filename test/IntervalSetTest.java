@@ -49,19 +49,19 @@ class IntervalSetTest {
 	@Test
 	void testRemoveInterval() {
 		
-		//case removing a defined interval from a set
+		//case 1 removing a defined interval from a set
 		Interval i1 = new Interval(10,20);
 		Interval i2 = new Interval(25,30);
 		IntervalSet set1 = new IntervalSet(i1,i2);
 		Interval i3 = set1.removeInterval(i1);
 		assertEquals(i1, i3);
 		
-		//case removing a defined interval that is not in set
+		//case 2 removing a defined interval that is not in set
 		assertThrows(NoSuchElementException.class, () -> {
 			set1.removeInterval(i1);
 		});
 		
-		//case removing a null interval
+		//case 3 removing a null interval
 		assertThrows(IllegalArgumentException.class, () -> {
 			set1.removeInterval(null);
 		});
