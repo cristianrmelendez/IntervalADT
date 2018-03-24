@@ -69,6 +69,25 @@ class IntervalSetTest {
 	
 	@Test
 	void testAddInterval() {
+		//case 1 inserting interval in set and has correct ordering
+		ArrayList<Interval> list= new ArrayList<>();
+		Interval i1 = new Interval(10,20);
+		Interval i2 = new Interval(25,30);
+		list.add(i1);
+		list.add(i2);
+		IntervalSet set1 = new IntervalSet(i1);
+		set1.addInterval(i2);
+		assertEquals(list, set1.getSubsets());
+		
+		//case 2 inserting smaller interval than current interval in set and has correct ordering
+		IntervalSet set2 = new IntervalSet(i2);
+		set2.addInterval(i1);
+		assertEquals(list, set2.getSubsets());
+		
+		//case 3 inserting null throws
+		assertThrows(IllegalArgumentException.class, ()->{
+			set2.addInterval(null);
+		});
 		
 	}
 	
