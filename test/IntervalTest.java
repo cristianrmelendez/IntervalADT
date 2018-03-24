@@ -79,34 +79,52 @@ class IntervalTest {
 	
 	@Test
 	void intervalUnionTest() {
+		//case 1 (10,15) U (18,20) = [ (10,15) , (18,20) ]
 		Interval t1 = new Interval(10.0,15.0);
 		Interval t2 = new Interval(18.0,20.0);
 		IntervalSet set = Interval.union(t1, t2);
 		IntervalSet set2 = new IntervalSet(t1, t2);
 		assertEquals(set2, set);
 		
+		//case 2 (10,15) U (10,15) throws
 		assertThrows(IllegalArgumentException.class, () -> {
 			 Interval.union(t1, t1);
 		});
 		
+		//case 3 Null U Null throws
 		assertThrows(IllegalArgumentException.class, () -> {
 			 Interval.union(null, null);
 		});
 		
+		//case 4 (10,15) U (14,21) = [ (10,21) ]
 		Interval t3 = new Interval(14.0, 21.0);
 		IntervalSet set3 = Interval.union(t1, t3);
 		IntervalSet set4 = new IntervalSet(new Interval(10.0,21.0));
 		assertEquals(set4, set3);
 		
+		//case 5 (-inf,+inf) U (18,20) = [ (-inf,+inf) ]
 		Interval t4 = new Interval(true, false);
 		IntervalSet set5 = new IntervalSet(t4);
 		IntervalSet set6 = Interval.union(t4, t2);
 		assertEquals(set5, set6);
 		
+		//case 6 (-inf,20) U (30,+inf) = [ (-inf,20) , (30,+inf) ]
 		Interval t5 = new Interval(Double.NEGATIVE_INFINITY, 20);
 		Interval t6 = new Interval(30, Double.POSITIVE_INFINITY);
 		IntervalSet set7 = Interval.union(t5, t6);
 		IntervalSet set8 = new IntervalSet(t5, t6);
 		assertEquals(set8, set7);
+		
+		//case 7 ø U (-inf,+inf) = [ (-inf,+inf) ]
+		Interval t8 = new Interval(false,true);
+		IntervalSet set9 = Interval.union(t8, t4);
+		IntervalSet set10 = new IntervalSet(t4);
+		assertEquals(set10,set9);
+		
+		//case 8 ø U (10,15) = [ (10,21) ]
+		IntervalSet set11 = new IntervalSet(t1);
+		IntervalSet set12 = Interval.union(t1, t8);
+		assertEquals(set11, set12);
+		
 	}
 }

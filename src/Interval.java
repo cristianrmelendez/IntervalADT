@@ -140,7 +140,7 @@ public class Interval implements Comparable<Interval> {
 	 * @param interval1 interval one of to be joined.
 	 * @param interval2 interval two to be joined.
 	 * @return interval set containing an interval or intervals to represent the union operation
-	 * @throws IllegalArgumentException if any of the intervals is null.
+	 * @throws IllegalArgumentException if any of the intervals is null or if both intervals are equal.
 	 */
 	public static IntervalSet union(Interval interval1, Interval interval2) {
 		
