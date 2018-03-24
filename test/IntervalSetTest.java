@@ -19,13 +19,13 @@ class IntervalSetTest {
 		IntervalSet set2 = new IntervalSet(i1);
 		ArrayList<Interval> list= new ArrayList<>();
 		list.add(i1);
-		assertEquals(list, set2.getSubsets());
+		assertEquals(list, set2.getIntervals());
 		
 		//case 3 (interval, interval) constructor with parameters in correct order
 		Interval i2 = new Interval(25,30);
 		IntervalSet set3 = new IntervalSet(i1,i2);
 		list.add(i2);
-		assertEquals(list, set3.getSubsets());
+		assertEquals(list, set3.getIntervals());
 		
 		//case 4 (null, interval) with normal constructor throws
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -42,7 +42,7 @@ class IntervalSetTest {
 		ArrayList<Interval> list2 = new ArrayList<>();
 		list2.add(i1);
 		list2.add(i2);
-		assertEquals(list2, set4.getSubsets());
+		assertEquals(list2, set4.getIntervals());
 		
 	}
 	
@@ -77,12 +77,12 @@ class IntervalSetTest {
 		list.add(i2);
 		IntervalSet set1 = new IntervalSet(i1);
 		set1.addInterval(i2);
-		assertEquals(list, set1.getSubsets());
+		assertEquals(list, set1.getIntervals());
 		
 		//case 2 inserting smaller interval than current interval in set and has correct ordering
 		IntervalSet set2 = new IntervalSet(i2);
 		set2.addInterval(i1);
-		assertEquals(list, set2.getSubsets());
+		assertEquals(list, set2.getIntervals());
 		
 		//case 3 inserting null throws
 		assertThrows(IllegalArgumentException.class, ()->{
