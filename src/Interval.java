@@ -156,6 +156,8 @@ public class Interval implements Comparable<Interval> {
 	}
 	
 	
+	
+	
 	/**
 	 * This method will return true if the element is within the range of the target interval.
 	 * @param element double number to find in range.
