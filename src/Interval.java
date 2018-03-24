@@ -3,7 +3,6 @@ public class Interval implements Comparable<Interval> {
 
 	private double min; 
 	private double max;
-	private Boolean universal;
 	private Boolean empty;
 	
 	
@@ -21,29 +20,31 @@ public class Interval implements Comparable<Interval> {
 		
 		this.min = min;
 		this.max = max;
+		this.empty = false;
 	}
 	
 	
 	
 	/**
-	 * If universal is true
-	 * min will be set to negative infinity and max will be set to positive infinity. If empty is true the interval will represent
-	 * the empty set
+	 * If universal is true min will be set to negative infinity and max will be set to positive infinity.
+	 * If empty is true the interval will represent the empty set
 	 */
 	public Interval(Boolean universal, Boolean empty) {
 		if(universal && empty)
 			throw new IllegalArgumentException("An Interval cannot be the Universal set and the empty set at the same time");
 		
-		if (!(universal && empty))
+		if (universal == false && empty == false)
 			throw new IllegalArgumentException("Must specified one, universal or empty");
 		
 		if(universal) {
 			this.min = Double.NEGATIVE_INFINITY;
 			this.max = Double.POSITIVE_INFINITY;
+			this.empty = false;
 			}
 			else {
 			this.min = 0; 
 			this.max = 0; 
+			this.empty = true;
 			}
 	}
 	
@@ -51,45 +52,40 @@ public class Interval implements Comparable<Interval> {
 	 * Return the min value of the interval, if the set is empty the return an null value
 	 * @return min
 	 */
-	public double getMin() {
-		return this.min;
+	public double getMin() throws UnsupportedOperationException {
+		if (this.empty)
+			throw new UnsupportedOperationException("Empty set does not have min");
+		
+		else return this.min;
 	}
 
-	/**
-	 * Set new Minimum
-	 * @param min Double new Minimum
-	 */
-	public void setMin(double min) {
-		this.min = min;
-	}
+	
 	/**
 	 * Return the max value of the interval, if the set is empty the return an null value
 	 * @return max
 	 */
-	public double getMax() {
-		return this.max;
+	public double getMax() throws UnsupportedOperationException {
+		if (this.empty)
+			throw new UnsupportedOperationException("Empty set does not have max"); 
+		
+		else return this.max;
 	}
 	
-	/**
-	 * Set new Maximum
-	 * @param max Double new Maximum
-	 */
-	public void setMax(double max) {
-		this.max = max;
-	}
 	
 	/**
 	 * Returns true if empty set
 	 * @return true if empty set, false otherwise
 	 */
 	public boolean isUniversal() {
-		return this.universal;
+		return this.min == Double.NEGATIVE_INFINITY && this.max == Double.POSITIVE_INFINITY;
 	}
+	
+	
 	/**
 	 * Returns true if empty set
 	 * @return true if empty set, false otherwise
 	 */
-	public boolean isEmptySet() {
+	public boolean isEmpty() {
 		return this.empty;
 	}
 
@@ -128,7 +124,7 @@ public class Interval implements Comparable<Interval> {
 
 		else {
 			// case 5 && 6
-			return null;
+			return new Interval(false, true);
 
 		}
 	}

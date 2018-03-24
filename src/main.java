@@ -3,8 +3,8 @@ public class main {
 
 	public static void main(String[] args) {
 
-	Interval subset1 = new Interval(-23.00, 1.64);
-	Interval subset2 = new Interval(-23.00, 10.64);
+	Interval subset1 = new Interval(-23, 1);
+	Interval subset2 = new Interval(-23, 10);
 	
 	Interval intersection = subset1.intersects(subset2);
 	System.out.println(intersection);
