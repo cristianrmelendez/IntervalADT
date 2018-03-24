@@ -3,7 +3,7 @@ public class Interval implements Comparable<Interval> {
 
 	private double min; 
 	private double max;
-	private Boolean empty;
+	private boolean empty;
 	
 	
 	/**
@@ -29,7 +29,7 @@ public class Interval implements Comparable<Interval> {
 	 * If universal is true min will be set to negative infinity and max will be set to positive infinity.
 	 * If empty is true the interval will represent the empty set
 	 */
-	public Interval(Boolean universal, Boolean empty) {
+	public Interval(boolean universal, boolean empty) {
 		if(universal && empty)
 			throw new IllegalArgumentException("An Interval cannot be the Universal set and the empty set at the same time");
 		
@@ -131,6 +131,20 @@ public class Interval implements Comparable<Interval> {
 	}
 	
 	/**
+	 * This will find the complement of an interval. The complement is the outer boundaries of the interval and will represented by a pair of
+	 * intervals that group all values that do not fall in the range of the passed interval.
+	 * @param interval Interval to find the complement
+	 * @return  an IntervalSet containing the intervals that represent the complement of inputed interval
+	 * @throws IllegalArgumentException if the interval passed is null.
+	 */
+	public IntervalSet complement() {
+		
+		
+		return null;
+	}
+	
+	
+	/**
 	 * Takes 2 intervals and if they intersect, will return an interval set with one interval representing both intervals.
 	 * If they don't intersect, it will return an interval set containing both intervals.
 	 * @param interval1 interval one of to be joined.
@@ -144,18 +158,7 @@ public class Interval implements Comparable<Interval> {
 		return null;
 	}
 	
-	/**
-	 * This will find the complement of an interval. The complement is the outer boundaries of the interval and will represented by a pair of
-	 * intervals that group all values that do not fall in the range of the passed interval.
-	 * @param interval Interval to find the complement
-	 * @return  an IntervalSet containing the intervals that represent the complement of inputed interval
-	 * @throws IllegalArgumentException if the interval passed is null.
-	 */
-	public static IntervalSet complement(Interval interval) {
-		
-		
-		return null;
-	}
+	
 	
 	
 	
@@ -165,16 +168,22 @@ public class Interval implements Comparable<Interval> {
 	 * @param element double number to find in range.
 	 * @return true if in range false otherwise.
 	 */
-	public Boolean contains(double element ) {
+	public boolean contains(double element ) {
 		
 		return true;
 	}
+	
+	
+	
 
 	@Override
 	public int compareTo( final Interval t) {
-		if (this.min > t.min) {
+		//TODO
+		// This is wrong
+		
+		if (this.min > t.getMin()) {
 			return -1;
-		}else if (this.max < t.max) {
+		}else if (this.max < t.getMax()) {
 			return 1;
 		} else {
 			return 0;
