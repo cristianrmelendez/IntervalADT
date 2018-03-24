@@ -45,7 +45,7 @@ public class IntervalSet {
 	 * Returns the array list representing the set of intervals sorted in ascending order
 	 * @return array list of intervals that represent interval set.
 	 */
-	public ArrayList<Interval> getSubsets() {
+	public ArrayList<Interval> getIntervals() {
 		return intervals;
 	}
 
