@@ -10,8 +10,6 @@ public class Interval implements Comparable<Interval> {
 	 * Create a new Interval, if min is greater than or equal to max throws illegal argument exception. 
 	 * @param min Double minimum value of the tuple
 	 * @param max Double maximum value of the tuple
-	 * @param universal - if true the interval will represent all the real numbers
-	 * @param empty -  if true the interval will represent the empty set
 	 * @throws IllegalArgumentException if min is greater or equal to max
 	 */
 	public Interval(double min, double max) { 
@@ -28,6 +26,9 @@ public class Interval implements Comparable<Interval> {
 	/**
 	 * If universal is true min will be set to negative infinity and max will be set to positive infinity.
 	 * If empty is true the interval will represent the empty set
+	 * @param universal - if true the interval will represent all the real numbers
+	 * @param empty -  if true the interval will represent the empty set
+	 * @throws IllegalArgumentException if min is greater or equal to max
 	 */
 	public Interval(boolean universal, boolean empty) {
 		if(universal && empty)
@@ -49,8 +50,9 @@ public class Interval implements Comparable<Interval> {
 	}
 	
 	/**
-	 * Return the min value of the interval, if the set is empty the return an null value
+	 * Return the min value of the interval, if the set is empty the return a null value
 	 * @return min
+	 * @throws UnsupportedOperationException if you try to get the min value when the interval in an empty Interval
 	 */
 	public double getMin() throws UnsupportedOperationException {
 		if (this.empty)
@@ -61,8 +63,9 @@ public class Interval implements Comparable<Interval> {
 
 	
 	/**
-	 * Return the max value of the interval, if the set is empty the return an null value
+	 * Return the max value of the interval, if the set is empty the return a null value
 	 * @return max
+	 * @throws UnsupportedOperationException if you try to get the max value when the interval in an empty Interval
 	 */
 	public double getMax() throws UnsupportedOperationException {
 		if (this.empty)
@@ -73,8 +76,8 @@ public class Interval implements Comparable<Interval> {
 	
 	
 	/**
-	 * Returns true if empty set
-	 * @return true if empty set, false otherwise
+	 * Returns true if the interval represent the Universal interval [ -inf , inf ]
+	 * @return true if it is the universal interval, false otherwise
 	 */
 	public boolean isUniversal() {
 		return this.min == Double.NEGATIVE_INFINITY && this.max == Double.POSITIVE_INFINITY;
