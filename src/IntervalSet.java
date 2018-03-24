@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class IntervalSet {
 	
@@ -69,7 +70,7 @@ public class IntervalSet {
 	 * @return The removed interval from the interval set
 	 * @throws NoSuchElementException if the interval is not in the interval set.
 	 */
-	public Interval removeInterval(Interval i) {
+	public Interval removeInterval(Interval i) throws NoSuchElementException {
 
 		//TODO
 		return null;

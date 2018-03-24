@@ -136,7 +136,6 @@ public class Interval implements Comparable<Interval> {
 	/**
 	 * This will find the complement of an interval. The complement is the outer boundaries of the interval and will represented by a pair of
 	 * intervals that group all values that do not fall in the range of the passed interval.
-	 * @param interval Interval to find the complement
 	 * @return  an IntervalSet containing the intervals that represent the complement of inputed interval
 	 * @throws IllegalArgumentException if the interval passed is null.
 	 */
